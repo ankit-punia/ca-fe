@@ -1,0 +1,11 @@
+<app-header class="shadow" *ngIf="user != null"></app-header>
+<router-outlet>
+</router-outlet>
+
+<div class="modalBackDrop dNone" (click)="closeModal()"></div>
+<div class="modalSection shadow">
+    <h3 class="modalTitle shadow"></h3>
+    <div class="modalContent">
+        <router-outlet name="modal"></router-outlet>
+    </div>
+</div>

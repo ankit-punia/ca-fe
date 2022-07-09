@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: b8it148gaganfe 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: b8it148gaganfe
+  template:
+    metadata:
+      labels:
+        app: b8it148gaganfe 
+    spec:
+      containers:
+        - name: b8it148gaganfe 
+          image: b8it148gagan.azurecr.io/b8it148gaganfe
+          ports:
+          - containerPort: 80

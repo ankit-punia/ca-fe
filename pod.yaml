@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ca-frontend
+spec:
+  selector:
+    matchLabels:
+      deployment-name: ca-frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        deployment-name: ca-frontend 
+    spec:
+      containers:
+        - name: ca-frontend-container
+          image: devops2022.azurecr.io/cafe
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: ca-cluster-service
+  name: ca-cluster-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: ca-cluster-service-port
+    port: 80
+    protocol: TCP
+  selector:
+    deployment-name: ca-frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: ca-cluster-service 
+  name: ca-cluster-service-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+  - name: load-balancer-service-port
+    port: 80
+    protocol: TCP
+  selector:
+    deployment-name: ca-frontend
